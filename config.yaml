@@ -1,0 +1,25 @@
+input_features:
+  - name: phrase
+    type: text
+    level: word
+    encoder: rnn
+    cell_type: lstm
+    reduce_output: null
+    preprocessing:
+      word_tokenizer: romanian_tokenize
+
+output_features:
+  - name: diacritics_phrase
+    type: text
+    level: word
+    decoder: generator
+    cell_type: lstm
+    attention: bahdanau
+    reduce_input: null
+    loss:
+      type: sampled_softmax_cross_entropy
+    preprocessing:
+      word_tokenizer: romanian_tokenize
+
+training:
+  batch_size: 32
